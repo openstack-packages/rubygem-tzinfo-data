@@ -3,7 +3,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 1.2014.10
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Timezone Data for TZInfo
 Group: Development/Languages
 License: MIT
@@ -14,6 +14,9 @@ BuildRequires: rubygems-devel
 BuildRequires: ruby >= 1.8.7
 BuildRequires: rubygem-minitest
 BuildArch: noarch
+%if 0%{?fedora} <= 20 || 0%{?el7}
+Provides: rubygem(%{gem_name}) = %{version}
+%endif
 
 %description
 TZInfo::Data contains data from the IANA Time Zone database packaged as Ruby
@@ -72,5 +75,8 @@ popd
 %doc %{gem_instdir}/.yardopts
 
 %changelog
+* Mon Jun 01 2015 Graeme Gillies <ggillies@redhat.com> - 1.2014.10-2
+- Added explicit provides for EL7
+
 * Mon Jan 05 2015 Graeme Gillies <ggillies@redhat.com> - 1.2014.10-1
 - Initial package
